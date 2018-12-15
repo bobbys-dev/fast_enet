@@ -37,8 +37,8 @@ equal to the worst case round-trip propagation time. If tau is the propagation
 time for a signal to travel from end to end of the bus, then the roundtrip time
  is 2*tau
  – In general, after the ith collision, where i <= 10, a station will wait for a random
- number of slot times chosen from the interval from 0 to 2i −1. However, after 10
- collision, the random interval is fixed between 0 and 2^10 − 1 = 1023 time slots.
+ number of slot times chosen from the interval from 0 to 2^i −1. However, after 10
+ collisions, the random interval is fixed between 0 and 2^10 − 1 = 1023 time slots.
  – After 16 collisions, the Ethernet controller for a station suspends retransmissions
  and reports the failure to the data link layer.
 – For example, after the first collision, a station waits for either 0,

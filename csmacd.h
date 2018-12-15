@@ -2,7 +2,7 @@
 #include <deque>
 
 #define MAX_QUEUE_SIZE 15
-#define MAX_STATIONS 10
+//#define MAX_STATIONS 10 // do no use. do not hardcode the SP limit
 
 #define MAX_COLLISIONS 16
 
@@ -28,10 +28,16 @@ struct data_frame {
    int data;
 };
 
+/*
+request of a station process
+*/
 struct sp_request {
    int sp_id;
 };
 
+/*
+Reply of a communication switch process
+*/
 struct csp_reply {
    int reply;
    int sp_id;
@@ -40,7 +46,7 @@ struct csp_reply {
 struct global_status {
    time_slot current_timeslot;
    int num_stations;
-}
+};
 
 void create_station_process();
 void log_event(string e);
