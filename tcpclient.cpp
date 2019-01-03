@@ -1,12 +1,13 @@
 #include "unp_cust.h"
-
+#include "station_process.h"
+#include <iostream>
 #define PORT 50000
 #define MAX 64
 
+using namespace CS5310;
 void chat(int sockfd);
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
    int sockfd, connfd;
    int n;
    struct sockaddr_in servaddr, cli;
@@ -53,6 +54,11 @@ int main(int argc, char **argv)
 void chat(int sockfd) {
    char recvline[MAX];
    int n;
+
+   StationProcess* sp = new StationProcess();
+   data_frame* df;
+   df = sp->get_next_event();
+   std::cout << df->event << std::endl;
    while (1) {
       bzero(recvline, sizeof(recvline));
       printf("Enter the string : ");

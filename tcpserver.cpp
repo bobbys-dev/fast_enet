@@ -8,8 +8,6 @@
 * This is the server program that acts at CBP. It takes client requests and
 * handles it according to it's queue capacity
 *
-*
-*
 **/
 int main(int argc, char **argv)
 {
@@ -140,7 +138,7 @@ int main(int argc, char **argv)
                   getpeername(sd,
                            (struct sockaddr*)&servaddr,
                            (socklen_t*)&addrlen);
-                  printf("A Host disconnected, IP %s, port %d \n" ,
+                  printf("A host disconnected, IP %s, port %d \n" ,
                        inet_ntoa(servaddr.sin_addr) , ntohs(servaddr.sin_port));
 
                   //Close the socket and mark as 0 in list for reuse

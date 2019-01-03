@@ -1,6 +1,7 @@
 #include "station_process.h"
 #include <iostream> //for debug
 
+#define DUMMY_DATA 7777
 namespace CS5310
 {
 
@@ -23,39 +24,27 @@ namespace CS5310
       this->wait_for_n_frames = 0;
       this->station_address = rand() % 999 + 1001;
       this->df = new data_frame;
+      this->df->src = this->station_address;
+      this->df->data = DUMMY_DATA;
       std::cout << "My station address is " << this->station_address << std::endl;
    }
 
-   int StationProcess::get_bebo_time (const int ith_collision) {
-      int max;
-
-      if (ith_collision <= 10) {
-         //max is 2^i - 1
-         max = (int)pow(2,ith_collision) - 1;
-
-      } else {
-         //max is 2^10 - 1
-         max = (int)pow(2,10) - 1;
-      }
-      return rand() % (max + 1);
-   }
-
-   int StationProcess::get_station_status(const int station_address) {
+   int StationProcess::get_station_status() {
       return this->station_status;
    }
 
-   data_frame* StationProcess::get_data_frame(const int station_address) {
+   data_frame* StationProcess::get_next_event() {
 
-          std::fstream file(station_file);
+         std::fstream file(this->station_file);
 
          this->gotoline(file, next_line);
 
           std::string event;
           getline(file,event); // get entire event line in file
-
+          df->event = event; //get entire event description to log
           //limit of search is 2 digits
          if (event.find("Waiting") == 0) {
-            wait_for_n_frames = stoi(event.substr(event.find("Wait")+19,2));
+            wait_for_n_frames = std::stoi(event.substr(event.find("Wait")+19,2));
          } else {
             if(event.find("Frame") != std::string::npos) {
                df->seq =  stoi(event.substr(event.find(" ")+1,2));
@@ -65,9 +54,8 @@ namespace CS5310
                df->dst =  stoi(event.substr(event.find("SP ")+3,2));
                 std::cout << "target is:"<< df->dst << std::endl;
             }
-            df->src = this->station_address;
-            df->data = 7777;
          }
+         next_line++;
          return df;
    }
 

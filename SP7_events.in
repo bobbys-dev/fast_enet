@@ -1,4 +1,4 @@
-Frame 1, To SP 3
+Frame 1, To SP 2
 Wait for receiving 2 frames
 Frame 2, To SP 8
 Wait for receiving 1 frame

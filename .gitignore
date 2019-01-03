@@ -64,3 +64,4 @@ dkms.conf
 
 # other directory
 include/
+*.docx

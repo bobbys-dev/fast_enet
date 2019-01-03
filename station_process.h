@@ -1,4 +1,5 @@
 #ifndef STATION_PROCESS_H
+#define STATION_PROCESS_H
 #include <cstdlib>
 #include <fstream>
 #include <limits>
@@ -25,24 +26,24 @@ class StationProcess {
 
 public:
 
-  // typedef int station_status;
    /**
    *default constructor
    **/
    StationProcess();
 
    /**
-   * Precondtion: must have had at least 1 collision but less than 16
-   * : unsigned int returned to tell station to wait for that interval
+   * returns the station status, which is waiting or sending
+   * Precondtion: station exists
+   * Postcodition: int representing station status (wait, sending)
    **/
-   int get_bebo_time(const int ith_collision);
+   int get_station_status();
 
    /**
+   * returns the pointer to the event datafrom
    * Precondtion: station exists
-   * Postcodition: int representing station status (wait, sending, collided)
+   * Postcodition: int representing station status (wait, sending)
    **/
-   int get_station_status(const int station_address);
-   data_frame* get_data_frame(const int station_address);
+   data_frame* get_next_event();
 
 private:
 
@@ -55,7 +56,6 @@ private:
    int next_line; //tracks line in file
 
    std::fstream& gotoline(std::fstream& file, const int num);
-
 
 };
 

@@ -38,7 +38,7 @@
 #include	<sys/un.h>		/* for Unix domain sockets */
 
 #ifdef	HAVE_SYS_SELECT_H
-# include	<sys/select.h>	/* for convenience */
+//#include	<sys/select.h>	/* for convenience */
 #endif
 
 #ifdef	HAVE_SYS_SYSCTL_H
